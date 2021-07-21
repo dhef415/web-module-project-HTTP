@@ -5,7 +5,6 @@ import axios from 'axios';
 
 const Movie = (props) => {
     const { addToFavorites } = props;
-    // const { deleteMovie } = props;
 
     const [movie, setMovie] = useState('');
 
@@ -22,11 +21,11 @@ const Movie = (props) => {
             })
     }, [id]);
 
-    const deleteMovie = ()=> {
+    const handleDelete = ()=> {
         console.log('working');
         axios.delete(`http://localhost:5000/api/movies/${id}`)
           .then(res => {
-            setMovie(res.data);
+            props.deleteMovie(id);
             push('/movies');
           })
           .catch(err => {
@@ -66,7 +65,7 @@ const Movie = (props) => {
                         <section>
                             <span className="m-2 btn btn-dark">Favorite</span>
                             <Link to={`/movies/edit/${movie.id}`} className="m-2 btn btn-success">Edit</Link>
-                            <span  className="delete"><input onClick={deleteMovie} type="button" className="m-2 btn btn-danger" value="Delete"/></span>
+                            <span  className="delete"><input onClick={handleDelete} type="button" className="m-2 btn btn-danger" value="Delete"/></span>
                         </section>
                     </div>
                 </div>

@@ -8,6 +8,7 @@ import MovieHeader from './components/MovieHeader';
 
 import EditMovieForm from './components/EditMovieForm';
 import FavoriteMovieList from './components/FavoriteMovieList';
+import AddMovieForm from './components/AddMovieForm';
 
 import axios from 'axios';
 
@@ -27,17 +28,9 @@ const App = (props) => {
       });
   }, []);
 
-  // const deleteMovie = ()=> {
-  //   console.log('working');
-  //   axios.delete(`http://localhost:5000/api/movies/${id}`)
-  //     .then(res => {
-  //       setMovies(res.data)
-  //       push('/movies');
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     })
-  // }
+  const deleteMovie = (id)=> {
+    setMovies(movies.filter(item=>(item.id !== Number(id))));
+  }
 
   const addToFavorites = (movie) => {
     
@@ -59,8 +52,10 @@ const App = (props) => {
               <EditMovieForm />
             </Route>
 
+            
+
             <Route path="/movies/:id">
-              <Movie />
+              <Movie deleteMovie={deleteMovie} />
             </Route>
 
             <Route path="/movies">
