@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 
-import { Route, Switch, Redirect, useHistory, useParams } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import MovieList from './components/MovieList';
 import Movie from './components/Movie';
 
 import MovieHeader from './components/MovieHeader';
 
 import EditMovieForm from './components/EditMovieForm';
-import FavoriteMovieList from './components/FavoriteMovieList';
 import AddMovieForm from './components/AddMovieForm';
+import FavoriteMovieList from './components/FavoriteMovieList';
+
 
 import axios from 'axios';
 
 const App = (props) => {
-  // const { push } = useHistory();
-  // const { id } = useParams();
+  
   const [movies, setMovies] = useState([]);
   const [favoriteMovies, setFavoriteMovies] = useState([]);
 
@@ -52,7 +52,9 @@ const App = (props) => {
               <EditMovieForm />
             </Route>
 
-            
+            <Route path='/movies/add'>
+              <AddMovieForm setMovies={setMovies}/>
+            </Route>        
 
             <Route path="/movies/:id">
               <Movie deleteMovie={deleteMovie} />
